@@ -59,7 +59,7 @@ provider:
 functions:
   coffeNotification:
     handler: handler.coffeNotification
-    role: arn:aws:iam::371355836815:role/lambda-bc-coffe
+    role: arn:aws:iam::371355836815:role/lambda-bc-coffe-notify
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -71,7 +71,7 @@ functions:
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
-      - sqs: arn:aws:sqs:sa-east-1:371355836815:coffe-status-notify
+      - sns: arn:aws:sns:sa-east-1:371355836815:bc-coffe-notify
 #      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
 #      - alexaSkill: amzn1.ask.skill.xx-xx-xx-xx
 #      - alexaSmartHome: amzn1.ask.skill.xx-xx-xx-xx
