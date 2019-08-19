@@ -14,7 +14,10 @@ const put = (item) => {
         dynamoDb.put({
             TableName: TABLE,
             Item: {
-                message: item.message,
+                message: {
+                    data: item.data,
+                    type: item.type
+                },
                 id: item.id,
             }
         }, (error, data) => {
