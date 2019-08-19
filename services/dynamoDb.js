@@ -1,9 +1,10 @@
 const AWS = require('aws-sdk');
+require('dotenv/config');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-const TABLE = 'coffe-status-history';
-const REGION = 'sa-east-1';
+const TABLE = process.env.TABLE_DYNAMODB;
+const REGION = process.env.REGION;
 
 AWS.config.update({
     region: REGION,

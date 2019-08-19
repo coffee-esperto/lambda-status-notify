@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
+require('dotenv/config');
 
 const send = (body) => {
-    return fetch('https://hooks.slack.com/services/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', {
+    return fetch(process.env.CHANNEL_SLACK, {
         method: 'post',
         body:    JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' },
