@@ -12,14 +12,19 @@ AWS.config.update({
 
 const put = (item) => {
     return new Promise((resolve, reject) => {
+        if (item.data.location === undefined) {
+            return reject(error);
+        }
+
         dynamoDb.put({
             TableName: TABLE,
             Item: {
+                id: item.id,
+                location: item.data.location,
                 message: {
                     data: item.data,
                     type: item.type
-                },
-                id: item.id,
+                }
             }
         }, (error, data) => {
             if (error) {
