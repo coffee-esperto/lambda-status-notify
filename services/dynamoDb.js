@@ -13,7 +13,7 @@ AWS.config.update({
 const put = (item) => {
     return new Promise((resolve, reject) => {
         if (item.data.location === undefined) {
-            return reject(error);
+            return reject();
         }
 
         dynamoDb.put({
