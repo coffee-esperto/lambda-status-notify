@@ -4,12 +4,12 @@ const dynamoDb = require('./services/dynamoDb');
 const slack = require('./services/slack');
 
 module.exports.coffeNotification = async (event) => {
+  const payload = {
+    ...JSON.parse(event.Records[0].Sns.Message),
+    id: event.Records[0].Sns.MessageId,
+  };
+  
   try {
-    const payload = {
-      ...JSON.parse(event.Records[0].Sns.Message),
-      id: event.Records[0].Sns.MessageId,
-    };
-
     await dynamoDb.put(payload);
 
     let message = {
@@ -26,7 +26,7 @@ module.exports.coffeNotification = async (event) => {
   } catch (error) {
     return {
       statusCode: 422,
-      error: JSON.stringify(error),
+      error: error,
     }
   }
 

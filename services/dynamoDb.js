@@ -21,10 +21,11 @@ const put = (item) => {
             Item: {
                 id: item.id,
                 location: item.data.location,
+                createdAt: new Date().getTime(),
                 message: {
                     data: item.data,
                     type: item.type
-                }
+                },
             }
         }, (error, data) => {
             if (error) {
