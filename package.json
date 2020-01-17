@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-
     "dotenv": "^8.1.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "serverless": "^1.60.1"
   },
   "devDependencies": {
     "aws-sdk": "^2.509.0"

@@ -1,24 +1,24 @@
 'use strict';
 
-const dynamoDb = require('./services/dynamoDb');
 const slack = require('./services/slack');
+const hasura = require('./services/hasura');
 
 module.exports.coffeNotification = async (event) => {
   const payload = {
-    ...JSON.parse(event.Records[0].Sns.Message),
-    id: event.Records[0].Sns.MessageId,
+    hasCoffe: event.event.data.new.event.hasCoffee,
+    nodeId: event.event.data.new.node_id
   };
-  
+
   try {
-    await dynamoDb.put(payload);
+    let result = await hasura.send(payload.nodeId)
 
     let message = {
-      text: `Não tem café na ${payload.data.location} :x:`,
+      text: `Não tem café na ${result.data.nodes[0].description} :x:`,
       color: 'danger',
     }
 
-    if (payload.data.hasCoffee) {
-      message.text = `Tem café na ${payload.data.location} :coffee:`;
+    if (payload.hasCoffe) {
+      message.text = `Tem café na ${result.data.nodes[0].description} :coffee:`;
       message.color = 'good';
     }
 
